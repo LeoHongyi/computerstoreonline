@@ -27,9 +27,10 @@ function pwdBlur(){
 function checkLogin(){
 	var email=document.getElementById("email").value;
 	var pwd=document.getElementById("pwd").value;
-    var filter = /^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-	if(!filter.test(email)){
+     var reg = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
+	if(reg.test(email)){
          alert("input correct email");
+
          return false
 		}
 	if(pwd==""){
@@ -41,6 +42,12 @@ function checkLogin(){
 
 
 function jump(){
-	window.location.href="#";
+	window.location.href="register.php";
 	}
+
+
+
+
+
+
 

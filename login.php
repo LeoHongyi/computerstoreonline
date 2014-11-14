@@ -9,14 +9,76 @@
 
 
 </script>
+    <style type="text/css">
+    .code
+    {
+
+            font-family:Arial;
+            font-style:italic;
+             color:blue;
+             font-size:20px;
+             border:0;
+             font-weight:bolder;
+
+
+
+    }
+
+
+    </style>
+    <script language="javascript" type="text/javascript">
+
+        var code;
+        function createCode() {
+            code = "";
+            var codeLength = 6;
+            var checkCode = document.getElementById("checkCode");
+            var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //所有候选组成验证码的字符，当然也可以用中文的
+            for (var i = 0; i < codeLength; i++)
+            {
+                var charNum = Math.floor(Math.random() * 52);
+                code += codeChars[charNum];
+            }
+            if (checkCode)
+            {
+                checkCode.className = "code";
+                checkCode.innerHTML = code;
+            }
+        }
+        function validateCode()
+        {
+            var inputCode = document.getElementById("inputCode").value;
+            if (inputCode.length <= 0)
+            {
+                alert("input verification code");
+            }
+            else if (inputCode.toUpperCase() != code.toUpperCase())
+            {
+                alert("error verification code！");
+                createCode();
+            }
+            else
+            {
+                return true;
+            }
+        }
+     </script>
+
+
+
+
+
+
 
 </head>
-<body>
+<body  onload="createCode()">
 <!--header of login-page-->
 <div id="header">
    <div class="login_header_left"><img src="images/logo.jpg" alt="logo"></div>
    <div class="login_header_mid"><img src="images/login_header.jpg" alt="header"></div>
-   <div class="login_header_right"><a href="#" class="blue">main page</a> | <a href="#" class="blue">product display page</a>  | <a href="#" class="blue">shopping cart</a> | <a href="#" class="blue">register</a></div>
+   <div class="login_header_right"><a href="#" class="blue">main page</a> | <a href="#" class="blue">product display page</a>  | <a href="#" class="blue">shopping cart</a> | <a href="register.php" class="blue">register</a></div>
 </div>
 
 <!--content of login-page-->
@@ -51,22 +113,36 @@
    <div class="login_main_mid">
     <div class="login_content_top">Please login Newwark-IT</div>
     <div class="login_content_line"></div>
-    <form action="" method="post" onSubmit="return checkLogin()">
+    <form action="checkLogin.php" method="post" onSubmit="return checkLogin()">
+
+
     <dl class="login_content">
        <dt>Email address：</dt>
-       <dd><input id="email" type="text" class="login_content_input" onFocus="emailFocus()" onBlur="emailBlur()"></dd>
+       <dd><input name="email" id="email" type="text" class="login_content_input" onFocus="emailFocus()" onBlur="emailBlur()"></dd>
     </dl>
      <dl class="login_content">
        <dt>password：</dt>
-       <dd><input id="pwd" type="password" class="login_content_input" onFocus="pwdFocus()" onBlur="pwdBlur()"></dd>
+       <dd><input name="pwd"id="pwd" type="password" class="login_content_input" onFocus="pwdFocus()" onBlur="pwdBlur()"></dd>
     </dl>
     <dl class="login_content">
-       <dt></dt>
-       <dd></dd>
+       <dt>Verification code:</dt>
+       <dd>
+
+
+          <input  type="text"   id="inputCode" class= "login_content_input"/>
+
+
+           <div class="code" id="checkCode" onclick="createCode()" >
+           <a  href="#" onclick="createCode()">看不清换一张</a>
+
+
+
+
+       </dd>
     </dl>
      <dl class="login_content">
        <dt></dt>
-       <dd><input id="btn" value=" " type="submit" class="login_btn_out"  onmouseover="this.className='login_btn_over'"  onmouseout="this.className='login_btn_out'"></dd>
+       <dd><input id="btn" value=" " type="submit" class="login_btn_out"  onclick="validateCode();" onmouseover="this.className='login_btn_over'"  onmouseout="this.className='login_btn_out'"></dd>
     </dl>
 
 
@@ -83,6 +159,7 @@
     </div>
 
   </div>
+  <div class="login_main_right"><img src="images/login_main_04.jpg" alt="right.php"></div>
 </div>
 
 
